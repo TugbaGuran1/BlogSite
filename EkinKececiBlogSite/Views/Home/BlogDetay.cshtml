@@ -1,0 +1,333 @@
+﻿@model EkinKececiBlogSite.Models.WebsiteModels.BlogDetayModel
+@using EkinKececiBlogSite.Resources
+@{
+    ViewBag.Title = "BlogDetay";
+    Layout = "~/Views/Shared/_SiteLayout.cshtml";
+}
+
+
+<section class="s-content s-content--single">
+    <div class="row">
+        <div class="column large-12">
+            @if (ViewBag.lang == "tr")
+            {
+
+                <article class="s-post entry format-audio">
+
+
+                    <div class="s-content__primary">
+
+                        <h2 class="s-content__title s-content__title--post">@Model.armut.Baslik</h2>
+
+                        <ul class="s-content__post-meta">
+                            <li class="date"> @Model.armut.Kategori.KategoriAd</li>
+
+                        </ul>
+                        <p>
+                            <center>
+                                <img src="@Model.armut.ResimURL"
+                                     srcset="@Model.armut.ResimURL 2100w,
+                                      @Model.armut.ResimURL 1050w,
+                                        @Model.armut.ResimURL 525w" sizes="(max-width: 2100px) 100vw, 2100px" alt="">
+
+                            </center>
+                        </p>
+                        <p class="lead">
+                            @Html.Raw(Model.armut.Icerik)
+                        </p>
+
+
+
+                    </div> <!-- end s-content__primary -->
+                </article>
+            }
+            else
+            {
+                <article class="s-post entry format-audio">
+
+
+                    <div class="s-content__primary">
+
+                        <h2 class="s-content__title s-content__title--post">@Model.elma.Baslik</h2>
+
+                        <ul class="s-content__post-meta">
+                            <li class="date"> @Model.elma.KategoriEN.KategoriAd</li>
+
+                        </ul>
+                        <p>
+                            <center>
+                                <img src="@Model.elma.ResimURL"
+                                     srcset="@Model.elma.ResimURL 2100w,
+                                      @Model.elma.ResimURL 1050w,
+                                        @Model.elma.ResimURL 525w" sizes="(max-width: 2100px) 100vw, 2100px" alt="">
+
+                            </center>
+                        </p>
+                        <p class="lead">
+                            @Html.Raw(Model.elma.Icerik)
+                        </p>
+
+
+
+                    </div> <!-- end s-content__primary -->
+                </article>
+            }
+
+            <h3>@Lang.Yorumunuzu_Bırakın</h3>
+
+            <form name="cForm" id="cForm" class="s-content__form" method="post">
+                <fieldset>
+
+                    <div class="form-field">
+                        <input name="adsoyad" type="text" id="adsoyad" class="h-full-width" placeholder="@Lang.Adınız_Soyadınız" value="" data-msg="Lütfen en az 4 karakter giriniz.">
+                    </div>
+                    <br />
+                    <div class="form-field">
+                        <input name="email" type="text" id="eposta" class="h-full-width" placeholder="@Lang.Mail_Adresiniz" value="" required>
+                    </div>
+
+                    <br />
+                    <div class="message form-field">
+                        <textarea name="mesaj" id="icerik" class="h-full-width" placeholder="@Lang.Yorumunuz" required></textarea>
+                    </div>
+
+                    <button type="submit" id="gonder" class="submit btn btn--primary btn--medium h-full-width">@Lang.YORUM_YAP</button>
+
+                </fieldset>
+            </form>
+
+        </div> <!-- end column -->
+    </div> <!-- end row -->
+    <!-- comments
+    ================================================== -->
+    <div class="comments-wrap">
+
+        <div id="comments" class="row">
+            <div class="column">
+
+                @if (ViewBag.lang == "tr")
+                {
+                    <ol class="commentlist">
+
+
+                        <li class="thread-alt depth-1 comment">
+                            <h4>@Lang.Yorumlar</h4>
+                            @foreach (var item in Model.armut.Yorums.OrderByDescending(x => x.YorumID).Where(x => x.Onay == true))
+                            {
+                                <div class="comment__avatar">
+                                    <img class="avatar" src="~/Image/user.png" alt="" width="64" height="64">
+                                </div>
+
+                                <div class="comment__content">
+
+                                    <div class="comment__info">
+                                        <div class="comment__author">@item.AdSoyad</div>
+                                        <div class="comment__meta" style="width:300px;">
+                                            <div class="comment__time">@item.YorumTarih.ToString("dd MM yyyy") </div>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="comment__text">
+                                        <p>
+                                            @item.Icerik
+                                        </p>
+                                    </div>
+
+                                    @if (!string.IsNullOrEmpty(item.AdminCevabı))
+                                    {
+                                        <ul class="children">
+
+                                            <li class="thread-alt depth-1 comment">
+
+
+
+                                                <div class="comment__content">
+
+                                                    <div class="comment__info">
+
+                                                        <div class="comment__meta">
+
+                                                            <div class="comment__time"> @item.CevapTarihi.ToString("dd MM yyyy")  </div>
+                                                            <div class="comment__reply">
+                                                                <a class="comment-reply-link" href="#0"></a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="comment__text">
+
+
+                                                        <p>
+
+                                                            <div class="comment-area">
+                                                                <img class="avatar" src="~/Image/dda.png" alt="" width="64" height="64">
+                                                            </div>
+                                                            @item.AdminCevabı
+                                                        </p>
+                                                    </div>
+
+                                                </div>
+
+                                            </li>
+
+                                        </ul>
+                                    }
+
+                                </div>
+                                <hr />
+
+                            }
+
+
+                        </li>
+
+
+                    </ol>
+                }
+                else
+                {
+                    <ol class="commentlist">
+
+
+                        <li class="thread-alt depth-1 comment">
+                            <h4>@Lang.Yorumlar</h4>
+                            @foreach (var item in Model.elma.YorumEN.OrderByDescending(x => x.YorumID).Where(x => x.Onay == true))
+                            {
+                                <div class="comment__avatar">
+                                    <img class="avatar" src="~/Image/user.png" alt="" width="64" height="64">
+                                </div>
+
+                                <div class="comment__content">
+
+                                    <div class="comment__info">
+                                        <div class="comment__author">@item.AdSoyad</div>
+                                        <div class="comment__meta" style="width:300px;">
+                                            <div class="comment__time">@item.YorumTarih.ToString("dd MM yyyy") </div>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="comment__text">
+                                        <p>
+                                            @item.Icerik
+                                        </p>
+                                    </div>
+
+                                    @if (!string.IsNullOrEmpty(item.AdminCevabı))
+                                    {
+                                        <ul class="children">
+
+                                            <li class="thread-alt depth-1 comment">
+
+
+
+                                                <div class="comment__content">
+
+                                                    <div class="comment__info">
+
+                                                        <div class="comment__meta">
+
+                                                            <div class="comment__time"> @item.CevapTarihi.ToString("dd MM yyyy")  </div>
+                                                            <div class="comment__reply">
+                                                                <a class="comment-reply-link" href="#0"></a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="comment__text">
+
+
+                                                        <p>
+
+                                                            <div class="comment-area">
+                                                                <img class="avatar" src="~/Image/dda.png" alt="" width="64" height="64">
+                                                            </div>
+                                                            @item.AdminCevabı
+                                                        </p>
+                                                    </div>
+
+                                                </div>
+
+                                            </li>
+
+                                        </ul>
+                                    }
+
+                                </div>
+                                <hr />
+
+                            }
+
+
+                        </li>
+
+
+                    </ol>
+                }
+                <!-- END commentlist -->
+            </div> 
+        </div> 
+        </div>
+
+</section> <!-- end s-content -->
+
+
+
+
+<script src="~/Content/SiteLayout/js/jquery-3.2.1.min.js"></script>
+<script src="C:\Users\EKON 3\source\repos\EkinKececiBlogSite\EkinKececiBlogSite\Scripts\jquery-3.5.1.js"></script>
+@*var yorumtarihiniz = $("#yorumtarih").val();
+    var cevaptarihiniz = $("#cevaptarih").val();
+    var admincevabı = $("#aciklama").val();*@
+
+@*yorumtarih: yorumtarihiniz, cevaptarih: cevaptarihiniz, aciklama:admincevabı,*@
+
+@if (ViewBag.lang == "tr")
+{
+    <script type="text/javascript">
+    $(document).ready(function () {
+
+        $("#gonder").click(function () {
+            var adisoyadi = $("#adsoyad").val();
+            var epostasi = $("#eposta").val();
+            var yorumunuz = $("#icerik").val();
+
+            $.ajax({
+                url: '/Home/YorumYap/',
+                data: { adsoyad: adisoyadi, eposta: epostasi, icerik: yorumunuz, blogid:@Model.armut.BlogId},
+                type: 'POST',
+                dataType: 'json',
+                success: function (data) {
+                    alert("Yorumunuz eklendi, kontrol edildikten sonra yayınlanacaktır.");
+                }
+            });
+        });
+    })
+
+    </script>
+}
+else
+{
+    <script type="text/javascript">
+    $(document).ready(function () {
+
+        $("#gonder").click(function () {
+            var adisoyadi = $("#adsoyad").val();
+            var epostasi = $("#eposta").val();
+            var yorumunuz = $("#icerik").val();
+
+            $.ajax({
+                url: '/Home/YorumYapEN/',
+                data: { adsoyad: adisoyadi, eposta: epostasi, icerik: yorumunuz, blogid:@Model.elma.BlogId},
+                type: 'POST',
+                dataType: 'json',
+                success: function (data) {
+                    alert("Your comment has been added, it will be published after checking.");
+                }
+            });
+        });
+    })
+
+    </script>
+}

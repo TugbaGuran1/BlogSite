@@ -1,0 +1,79 @@
+﻿@model  IPagedList<EkinKececiBlogSite.Models.Model.Blog>
+@using PagedList;
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "BlogKategori";
+    Layout = "~/Views/Shared/_SiteLayout.cshtml";
+}
+
+
+<section>
+    <h1 style="text-align:center; color:steelblue">BLOGLARIM</h1>
+
+    <div class="row">
+        <div class="column large-8 tab-12">
+            @foreach (var item in Model)
+            {
+                <h3><a href="BlogDetay/@item.BlogId">@item.Baslik</a></h3>
+
+                <p>
+                    <img src="@item.ResimURL" alt="@item.Baslik" style="width:620px; height:340px" />
+
+                    <ul> <li><i class="icon-folder-open"></i><a href="#"> @item.Kategori.KategoriAd</a></li></ul>
+                </p>
+                <p>   @Html.Raw(item.Icerik.Substring(0, 250))</p>
+
+                <a class="btn btn--primary h-full-width" href="/Home/BlogDetay/@item.BlogId">Devamını Gör</a>
+
+            }
+
+            <div id="pagination">
+                @Html.PagedListPager(Model, Sayfa => Url.Action("BlogKategori", new { Sayfa }), PagedListRenderOptions.Classic)
+            </div>
+
+
+
+        </div>
+        <div class="col-sm-4">
+            <aside class="right-sidebar">
+
+                <div>
+                    <br /><br />  
+
+
+                        <div class="widget">
+
+                            <h5 class="widgetheading">Kategoriler</h5>
+                            @{
+                                Html.RenderAction("KategoriPartial", "Home");
+                            }
+
+                        </div>
+
+                        <div class="">
+
+                            <h5 class="">Son Blog Kayıtları</h5>
+
+
+                                @{
+                                    Html.RenderAction("BlogKayitPartial", "Home");
+                                }
+
+                        
+
+                        </div>
+
+                </div>
+            </aside>
+
+        </div>
+    </div>
+
+</section>
+
+
+<a href="#" class="scrollup"><i class="fa fa-angle-up active"></i></a>
+
+
+
+

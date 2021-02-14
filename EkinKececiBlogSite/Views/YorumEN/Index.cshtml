@@ -1,0 +1,76 @@
+﻿@model IEnumerable<EkinKececiBlogSite.Models.Model.YorumEN>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.BlogEN.Baslik)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AdSoyad)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Eposta)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Icerik)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Onay)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.YorumTarih)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AdminCevabı)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CevapTarihi)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.BlogEN.Baslik)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AdSoyad)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Eposta)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Icerik)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Onay)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.YorumTarih)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AdminCevabı)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CevapTarihi)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.YorumID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.YorumID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.YorumID })
+        </td>
+    </tr>
+}
+
+</table>

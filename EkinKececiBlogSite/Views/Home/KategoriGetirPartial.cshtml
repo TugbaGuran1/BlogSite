@@ -1,0 +1,35 @@
+﻿
+
+@*@model EkinKececiBlogSite.Models.WebsiteModels.BlogKategoriModel
+
+@if (ViewBag.lang == "tr")
+{
+    <div class="row current-cat">
+        <div class="column">
+            @foreach (var item in Model.armut)
+            {
+            <h1 class="h2">
+                Kategori:<a href="/Home/BlogDetay/@item.KategoriId">@item.KategoriAd</a>
+            </h1>
+            }
+
+        </div>
+    </div>
+
+}
+else
+{
+    <div class="row current-cat">
+        <div class="column">
+            @foreach (var item in Model.elma)
+            {
+            <h1 class="h2">
+                Kategori:<a href="/Home/BlogDetay/@item.KategoriIden">@item.KategoriAd</a>
+            </h1>
+            }
+
+        </div>
+    </div>
+}*@
+
+

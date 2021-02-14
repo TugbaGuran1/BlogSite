@@ -1,0 +1,284 @@
+﻿@model  EkinKececiBlogSite.Models.WebsiteModels.IndexBlogModel
+@using PagedList;
+@using PagedList.Mvc;
+
+@{
+    Layout = "~/Views/Shared/_SiteLayout.cshtml";
+    ViewBag.Title = "Index";
+}
+
+
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+
+    <!--- basic page needs
+    ================================================== -->
+    <meta charset="utf-8">
+    <title>Abstract</title>
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- mobile specific metas
+     ================================================== -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- CSS
+    ================================================== -->
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/vendor.css">
+
+    <!-- script
+    ================================================== -->
+    <script src="js/modernizr.js"></script>
+
+    <!-- favicons
+    ================================================== -->
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+    <link rel="manifest" href="site.webmanifest">
+
+</head>
+
+<body id="top">
+
+
+    <!-- preloader
+    ================================================== -->
+    <div id="preloader">
+        <div id="loader"></div>
+    </div>
+
+    <section class="s-bricks">
+
+        <div class="masonry">
+            <div class="bricks-wrapper h-group">
+
+                <div class="grid-sizer"></div>
+
+                <div class="grid-sizer"></div>
+
+                <div class="brick entry featured-grid animate-this">
+                    <div class="entry__content">
+
+                        @{
+                            Html.RenderAction("SliderPartial", "Home");
+                        }
+
+                        <div class="featured-post-nav">
+                            <button class="featured-post-nav__prev">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12.707 17.293L8.414 13H18v-2H8.414l4.293-4.293-1.414-1.414L4.586 12l6.707 6.707z"></path></svg>
+                            </button>
+                            <button class="featured-post-nav__next">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M11.293 17.293l1.414 1.414L19.414 12l-6.707-6.707-1.414 1.414L15.586 11H6v2h9.586z"></path></svg>
+                            </button>
+                        </div> <!-- featured-post-nav -->
+                        <!-- featured-post-nav -->
+
+                    </div> <!-- end entry content -->
+                </div> <!-- end entry, featured grid -->
+                <!-- end entry, featured grid -->
+                @*//if else tr en*@
+
+                @if (ViewBag.lang == "tr")
+                {
+                    foreach (var item in Model.armut)
+                    {
+                        <article class="brick entry format-standard animate-this">
+
+
+                            <div class="entry__thumb">
+
+                                <a href="/Home/BlogDetay/@item.BlogId" class="thumb-link">
+                                    <img src="@item.ResimURL" srcset="@item.ResimURL 1x, @item.ResimURL 2x" alt="" style="width:100%">
+                                </a>
+                            </div> <!-- end entry__thumb -->
+
+                            <div class="entry__text">
+                                <div class="entry__header">
+
+                                    <div class="entry__meta">
+
+                                        <span class="entry__cat-links">
+                                            <a href="#"> @item.Kategori.KategoriAd</a>
+
+                                        </span>
+
+                                    </div>
+
+                                    <h1 class="entry__title"><a href="/Home/BlogDetay/@item.BlogId">@item.Baslik</a></h1>
+
+                                </div>
+                                <div class="entry__excerpt" style="text-align:justify">
+                                    <p>
+                                        @Html.Raw(@item.Icerik.Substring(0, 200))
+                                    </p>
+                                </div>
+
+                            </div> <!-- end entry__text -->
+
+                        </article> <!-- end entry -->
+                    }
+                }
+                else
+                {
+                    foreach (var item in Model.elma)
+                    {
+                        <article class="brick entry format-standard animate-this">
+
+
+                            <div class="entry__thumb">
+
+                                <a href="/Home/BlogDetay/@item.BlogId" class="thumb-link">
+                                    <img src="@item.ResimURL" srcset="@item.ResimURL 1x, @item.ResimURL 2x" alt="" style="width:100%">
+                                </a>
+                            </div> <!-- end entry__thumb -->
+
+                            <div class="entry__text">
+                                <div class="entry__header">
+
+                                    <div class="entry__meta">
+
+                                        <span class="entry__cat-links">
+                                            <a href="/Home/BlogDetay/"> @item.KategoriEN.KategoriAd</a>
+
+                                        </span>
+
+                                    </div>
+
+                                    <h1 class="entry__title"><a href="/Home/BlogDetay/@item.BlogId">@item.Baslik</a></h1>
+
+                                </div>
+                                <div class="entry__excerpt" style="text-align:justify">
+                                    <p>
+                                        @Html.Raw(@item.Icerik.Substring(0, 200))
+                                    </p>
+                                </div>
+
+                            </div> <!-- end entry__text -->
+
+                        </article> <!-- end entry -->
+                    }
+
+                }
+
+
+
+            </div> <!-- end brick-wrapper -->
+
+        </div> <!-- end masonry -->
+        @if (ViewBag.lang == "tr")
+        {
+
+            <div class="row">
+                <div class="column large-12">
+
+                    <nav class="pgn">
+                        <ul>
+                            @if (!Model.armut.IsFirstPage)
+                            {
+                                <li>
+                                    <a class="pgn__prev" href="../Home/Index?Sayfa=@(Model.armut.PageNumber-1)">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12.707 17.293L8.414 13H18v-2H8.414l4.293-4.293-1.414-1.414L4.586 12l6.707 6.707z"></path></svg>
+                                    </a>
+                                </li>
+                            }
+
+
+                            @for (int i = 1; i < Model.armut.PageCount + 1; i++)
+                            {
+                                if (i > 8)
+                                {
+                                    <li><span class="pgn__num dots">…</span></li>
+
+                                    break;
+                                }
+                                else if (i == Model.armut.PageNumber)
+                                {
+                                    <li>
+                                        <span class="pgn__num current">@i</span>
+                                    </li>
+                                }
+                                else
+                                {
+                                    <li><a class="pgn__num" href="../Home/Index?Sayfa=@i">@i</a></li>
+                                }
+                            }
+
+                            @if (!Model.armut.IsLastPage)
+                            {
+                                <li>
+                                    <a class="pgn__next" href="../Home/Index?Sayfa=@(Model.armut.PageNumber + 1)">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M11.293 17.293l1.414 1.414L19.414 12l-6.707-6.707-1.414 1.414L15.586 11H6v2h9.586z"></path></svg>
+                                    </a>
+                                </li>
+                            }
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        }
+        else
+        { <div class="row">
+                <div class="column large-12">
+
+                    <nav class="pgn">
+                        <ul>
+                            @if (!Model.elma.IsFirstPage)
+                            {
+                                <li>
+                                    <a class="pgn__prev" href="../Home/Index?Sayfa=@(Model.elma.PageNumber-1)">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12.707 17.293L8.414 13H18v-2H8.414l4.293-4.293-1.414-1.414L4.586 12l6.707 6.707z"></path></svg>
+                                    </a>
+                                </li>
+                            }
+
+
+                            @for (int i = 1; i < Model.elma.PageCount + 1; i++)
+                            {
+                                if (i > 8)
+                                {
+                                    <li><span class="pgn__num dots">…</span></li>
+
+                                    break;
+                                }
+                                else if (i == Model.elma.PageNumber)
+                                {
+                                    <li>
+                                        <span class="pgn__num current">@i</span>
+                                    </li>
+                                }
+                                else
+                                {
+                                    <li><a class="pgn__num" href="../Home/Index?Sayfa=@i">@i</a></li>
+                                }
+                            }
+
+                            @if (!Model.elma.IsLastPage)
+                            {
+                                <li>
+                                    <a class="pgn__next" href="../Home/Index?Sayfa=@(Model.elma.PageNumber + 1)">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M11.293 17.293l1.414 1.414L19.414 12l-6.707-6.707-1.414 1.414L15.586 11H6v2h9.586z"></path></svg>
+                                    </a>
+                                </li>
+                            }
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+
+        }
+
+
+
+
+    </section> <!-- end s-bricks -->
+
+
+
+
+
+</body>
+
+</html>

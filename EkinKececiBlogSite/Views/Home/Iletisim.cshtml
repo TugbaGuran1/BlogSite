@@ -1,0 +1,141 @@
+﻿@using EkinKececiBlogSite.Resources
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<section class="s-content site-page">
+    <div class="row">
+        <div class="column large-12">
+
+            <section>
+
+
+                <div class="s-content__primary">
+
+                    <h3 class="s-content__title">@Lang.Benimle_İletişime_Geçin</h3>
+
+                    <section class="map mt-2">
+                        <div class="container-fluid p-0">
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3062.50136534733!2d32.7355724156946!3d39.86300619705222!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14d34746cd358807%3A0x9fae427dface4053!2sHacettepe%20Teknokent%20A.%C5%9E.!5e0!3m2!1str!2str!4v1612001778838!5m2!1str!2str" width="900" height="450" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+
+                        </div>
+                    </section>
+                    <hr>
+
+                    <div class="row block-large-1-3 block-tab-full s-content__blocks">
+
+
+                        <div class="column">
+                            <h4>@Lang.İletişim_Bilgileri</h4>
+                            <p>
+
+                                <i class="fa fa-envelope"></i>
+                                E-posta <br />
+
+                                ekin@ekontekoloji.com<br>
+                                <i class="fa fa-phone"></i>Phone<br>
+
+                                (+90) 538 283 05 20
+
+                            </p>
+                        </div>
+
+                        <div class="column">
+                           
+                            <h4>@Lang.Adres_Bilgileri</h4>
+                            <p>
+                                Hacettepe Üniversitesi <br>
+                                Teknokent, 6. Ar-GE, C Blok,<br />
+                                No:11, G2, 06800 Çankaya/ANKARA
+                            </p>
+                        </div>
+
+                        <div class="column">
+                       
+                            <h4>@Lang.Sosyal_Ağlar</h4>
+                            <p>
+
+
+                                <i class="fa fa-linkedin-square"> <a href="https://tr.linkedin.com/in/ekin-ke%C3%A7eci-727b72113">  Linkedin</a></i><br />
+
+                                <i class="fa fa-twitter">
+                                    <a href="https://twitter.com/ekonteknoloji">Twitter</a>
+                                </i><br />
+
+                                <i class="fa fa-instagram">
+                                    <a href="https://www.instagram.com/ekonteknoloji/">Instagram</a>
+                                </i>
+                                <br />
+                                <i class="fa fa-facebook">
+                                    <a href="https://www.facebook.com/Ekontek/">Facebook</a>
+                                </i>
+
+                            </p>
+                        </div>
+                        </div>
+                    </div> <!-- end s-content__blocks -->
+                    <div class="">
+                        <div class="">
+                            <div class="">
+
+
+                                <h4><strong>@Lang.İletişim</strong></h4>
+
+                                <form name="cForm" id="cForm" class="s-content__form" method="post">
+
+                                    <fieldset>
+
+                                        <div class="form-field">
+                                            <input name="adsoyad" type="text" id="adsoyad" class="h-full-width" placeholder="@Lang.Adınız" value="" data-msg="Lütfen en az 4 karakter giriniz.">
+                                        </div>
+
+                                        <div class="form-field">
+                                            <input name="email" type="text" id="email" class="h-full-width" placeholder="@Lang.Mail_Adresiniz" value="" required>
+                                        </div>
+
+                                        <div class="form-field">
+                                            <input name="konu" type="text" id="konu" class="h-full-width" placeholder="@Lang.Mesaj_Konusu" value="" required>
+                                        </div>
+
+                                        <div class="message form-field">
+                                            <textarea name="mesaj" id="mesaj" class="h-full-width" placeholder="@Lang.Mesajınız" required></textarea>
+                                        </div>
+
+                                        <button type="submit" id="gonder" class="submit btn btn--primary btn--medium h-full-width">@Lang.GÖNDER</button>
+
+                                    </fieldset>
+                                </form>
+                                <!-- end form -->
+                            </div>
+                        </div>
+                    </div> <!-- end s-content__primary -->
+
+            </section>
+
+        </div> <!-- end column -->
+    </div> <!-- end row -->
+</section> <!-- end s-content -->
+<script src="~/Content/SiteLayout/js/jquery-3.2.1.min.js"></script>
+<script src="C:\Users\EKON 3\source\repos\EkinKececiBlogSite\EkinKececiBlogSite\Scripts\jquery-3.5.1.js"></script>
+
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        $("#gonder").click(function () {
+            var adisoyadi = $("#adsoyad").val();
+            var epostasi = $("#email").val();
+            var mesajınız = $("#mesaj").val();
+            var konunuz = $("#konu").val();
+
+            $.ajax({
+                url: '/Home/Index/',
+                data: { adsoyad: adisoyadi, email: epostasi, mesaj: mesajınız, konu: konunuz },
+                type: 'POST',
+                dataType: 'json',
+                success: function (data) {
+                    alert("Mesajınız gönderildi, en kısa sürede dönüş yapılacaktır.");
+                }
+            });
+        });
+    })
+
+</script>

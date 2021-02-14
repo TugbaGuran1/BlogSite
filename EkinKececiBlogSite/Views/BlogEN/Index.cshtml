@@ -1,0 +1,55 @@
+﻿@model IEnumerable<EkinKececiBlogSite.Models.Model.BlogEN>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#myTable').DataTable(
+
+            {
+                "language": {
+                    "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Turkish.json"
+                }
+            }
+        );
+    });
+</script>
+<h2>Blog Kayıtları</h2>
+
+<a class="btn btn-default" href="/BlogEN/Create/">Yeni Blog Ekle</a>
+
+<table class="table table-striped" id="myTable">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Başlık</th>
+            <th>Kategori</th>
+            <th>ResimURL</th>
+            <th>İşlemler</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.BlogId</td>
+                <td>@item.Baslik</td>
+
+                <td>@item.KategoriEN.KategoriAd</td>
+                <td><img src="@item.ResimURL" width="100" height="100" /></td>
+                <td><a href="/BlogEN/Edit/@item.BlogId">Güncelle</a> | <a href="/BlogEN/Delete/@item.BlogId">Sil</a></td>
+            </tr>
+        }
+
+
+    </tbody>
+</table>

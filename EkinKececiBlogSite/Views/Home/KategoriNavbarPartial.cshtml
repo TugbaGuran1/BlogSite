@@ -1,0 +1,43 @@
+﻿
+@model EkinKececiBlogSite.Models.WebsiteModels.BlogKategoriModel
+
+    @if (ViewBag.lang == "tr")
+    {
+        <ul class="cat">
+            @foreach (var item in Model.armut)
+            {
+                <li><i class="icon-angle-right"></i><a href="/Home/BlogMakaleKategori?id=@item.KategoriId">@item.KategoriAd</a></li>
+            }
+
+
+        </ul>
+
+    }
+else
+    { <ul class="cat">
+            @foreach (var item in Model.elma)
+            {
+                <li><i class="icon-angle-right"></i><a href="/Home/BlogMakaleKategori?id=@item.KategoriIden">@item.KategoriAd</a></li>
+            }
+
+
+        </ul>
+
+    }
+
+
+
+
+
+
+
+@*@model IEnumerable<EkinKececiBlogSite.Models.Model.Kategori>
+
+<ul class="cat">
+    @foreach (var item in Model)
+    {
+        <li><i class="icon-angle-right"></i><a href="/Home/BlogMakaleKategori?id=@item.KategoriId">@item.KategoriAd</a></li>
+    }
+
+
+</ul>*@

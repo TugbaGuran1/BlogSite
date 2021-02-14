@@ -1,0 +1,66 @@
+﻿@model  EkinKececiBlogSite.Models.WebsiteModels.SliderModel
+@{
+    Layout = null;
+}
+
+
+<div class="featured-post-slider">
+    @if (ViewBag.lang == "tr")
+    {
+        foreach (var item in Model.armut)
+        {
+            <div class="featured-post-slide">
+                <div class="f-slide">
+                    <a href="/Home/BlogDetay/@item.SliderID">
+
+                        <div class="f-slide__background" style="background-image:url('@item.ResimURL');"></div>
+
+                        <div class="f-slide__overlay"></div>
+
+                        <div class="f-slide__content">
+                            <ul class="f-slide__meta">
+                                <li><a href="/Home/BlogDetay/@item.SliderID">@item.Baslik</a></li>
+
+                            </ul>
+
+                            <h1 class="f-slide__title"><a href="/Home/BlogDetay/@item.SliderID" title="">@item.Aciklama</a></h1>
+                        </div>
+
+
+                    </a>
+                </div>
+            </div>
+
+        }
+    }
+    else
+    {
+        foreach (var item in Model.elma)
+        {
+            <div class="featured-post-slide">
+                <div class="f-slide">
+                    <a href="/Home/BlogDetay/@item.SliderID">
+
+                        <div class="f-slide__background" style="background-image:url('@item.ResimURL');"></div>
+
+                        <div class="f-slide__overlay"></div>
+
+                        <div class="f-slide__content">
+                            <ul class="f-slide__meta">
+                                <li>@item.Baslik</li>
+
+                            </ul>
+
+                            <h1 class="f-slide__title"><a href="/Home/BlogDetay/@item.SliderID" title="">@item.Aciklama</a></h1>
+                        </div>
+
+
+                    </a>
+                </div>
+            </div>
+
+        }
+    }
+    
+
+</div>  

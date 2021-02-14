@@ -1,0 +1,157 @@
+﻿@model  EkinKececiBlogSite.Models.WebsiteModels.IndexBlogModel
+@using PagedList;
+@using PagedList.Mvc;
+@{
+    Layout = null;
+}
+
+
+
+@if (ViewBag.lang == "tr")
+{
+    foreach (var item in Model.armut)
+    {
+
+
+        <article class="brick entry format-standard animate-this">
+
+
+            <div class="entry__thumb">
+
+                <a href="/Home/BlogDetay/@item.BlogId" class="thumb-link">
+                    <img src="@item.ResimURL" style="width:341px; height:420px;"
+                         srcset="@item.ResimURL 1x, @item.ResimURL 2x" alt="">
+                </a>
+            </div> <!-- end entry__thumb -->
+
+            <div class="entry__text">
+                <div class="entry__header">
+
+                    <div class="entry__meta">
+
+                        <span class="entry__cat-links">
+                            <a href="#"> @item.Kategori.KategoriAd</a>
+
+                        </span>
+
+                    </div>
+
+                    <h1 class="entry__title"><a href="/Home/BlogDetay/@item.BlogId">@item.Baslik</a></h1>
+
+                </div>
+                <div class="entry__excerpt" style="text-align:justify">
+                    <p>
+                        @Html.Raw(@item.Icerik.Substring(0, 200))
+                    </p>
+                </div>
+
+            </div> <!-- end entry__text -->
+
+        </article> <!-- end entry -->
+
+
+    }
+}
+
+else
+{
+    foreach (var item in Model.elma)
+    {
+
+
+        <article class="brick entry format-standard animate-this">
+
+
+            <div class="entry__thumb">
+
+                <a href="/Home/BlogDetay/@item.BlogId" class="thumb-link">
+                    <img src="@item.ResimURL" style="width:341px; height:420px;"
+                         srcset="@item.ResimURL 1x, @item.ResimURL 2x" alt="">
+                </a>
+            </div> <!-- end entry__thumb -->
+
+            <div class="entry__text">
+                <div class="entry__header">
+
+                    <div class="entry__meta">
+
+                        <span class="entry__cat-links">
+                            <a href="#"> @item.KategoriEN.KategoriAd</a>
+
+                        </span>
+
+                    </div>
+
+                    <h1 class="entry__title"><a href="/Home/BlogDetay/@item.BlogId">@item.Baslik</a></h1>
+
+                </div>
+                <div class="entry__excerpt" style="text-align:justify">
+                    <p>
+                        @Html.Raw(@item.Icerik.Substring(0, 200))
+                    </p>
+                </div>
+
+            </div> <!-- end entry__text -->
+
+        </article> <!-- end entry -->
+
+
+    }
+}
+<div class="row">
+    <div class="column large-12">
+
+        <nav class="pgn">
+            <ul>
+                <li>
+                    <a class="pgn__prev" href="#0">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12.707 17.293L8.414 13H18v-2H8.414l4.293-4.293-1.414-1.414L4.586 12l6.707 6.707z"></path></svg>
+                    </a>
+                </li>
+                <li><a class="pgn__num" href="#0">1</a></li>
+                <li><span class="pgn__num current">2</span></li>
+                <li><a class="pgn__num" href="#0">3</a></li>
+                <li><a class="pgn__num" href="#0">4</a></li>
+                <li><a class="pgn__num" href="#0">5</a></li>
+                <li><span class="pgn__num dots">…</span></li>
+                <li><a class="pgn__num" href="#0">8</a></li>
+                <li>
+                    <a class="pgn__next" href="#0">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M11.293 17.293l1.414 1.414L19.414 12l-6.707-6.707-1.414 1.414L15.586 11H6v2h9.586z"></path></svg>
+                    </a>
+                </li>
+            </ul>
+        </nav> <!-- end pgn -->
+    </div> <!-- end column -->
+</div>
+
+@if (ViewBag.lang == "tr")
+{<div class="row">
+        <div class="column large-12">
+
+            <div id="pagination" class="pgn">
+
+                @Html.PagedListPager(Model.armut, Sayfa => Url.Action("Home/Index", new { Sayfa }), PagedListRenderOptions.Classic)
+
+            </div>
+        </div>
+    </div>
+
+}
+else
+{ <div class="row">
+        <div class="column large-12">
+
+            <div id="pagination" class="pgn">
+
+                @Html.PagedListPager(Model.elma, Sayfa => Url.Action("Home/Index", new { Sayfa }), PagedListRenderOptions.Classic)
+
+            </div>
+        </div>
+    </div>
+}
+
+
+
+
+
