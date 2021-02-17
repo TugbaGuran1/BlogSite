@@ -142,30 +142,37 @@
 
 
 
+                                                <div class="comment__avatar">
+                                                    <img class="avatar" src="~/Image/photo.jpeg" alt="" width="64" height="64">
+                                                </div>
+
                                                 <div class="comment__content">
 
-                                                    <div class="comment__info">
+                                                    <div>
+                                                        <div class="comment__info">
 
-                                                        <div class="comment__meta">
+                                                            <div class="comment__meta">
 
-                                                            <div class="comment__time"> @item.CevapTarihi.ToString("dd MM yyyy")  </div>
-                                                            <div class="comment__reply">
-                                                                <a class="comment-reply-link" href="#0"></a>
+                                                                <div class="comment__time"> @item.CevapTarihi.ToString("dd MM yyyy")  </div>
+                                                                <div class="comment__reply">
+                                                                    <a class="comment-reply-link" href="#0"></a>
+                                                                </div>
                                                             </div>
                                                         </div>
+
+                                                        <div class="comment__text">
+
+                                                            <p>
+
+
+                                                                @item.AdminCevabı
+                                                            </p>
+
+
+                                                        </div>
+
                                                     </div>
 
-                                                    <div class="comment__text">
-
-
-                                                        <p>
-
-                                                            <div class="comment-area">
-                                                                <img class="avatar" src="~/Image/dda.png" alt="" width="64" height="64">
-                                                            </div>
-                                                            @item.AdminCevabı
-                                                        </p>
-                                                    </div>
 
                                                 </div>
 
